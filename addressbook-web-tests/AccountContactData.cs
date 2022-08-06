@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace addressbook_web_tests
+namespace WebAddressbookTests
 {
-    class AccountContactData
+     public class AccountContactData
     {
         public string username1;
         public string password1;
