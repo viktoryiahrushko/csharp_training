@@ -17,7 +17,6 @@ namespace WebAddressbookTests
             this.password = password;
         }
 
-
         public string Username
         {
             get

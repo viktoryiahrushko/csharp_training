@@ -53,6 +53,20 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("pass")).SendKeys(account.Password);
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
+        protected void Login(AccountContactData account)
+        {
+
+            driver.FindElement(By.Name("user")).Click();
+            driver.FindElement(By.Name("user")).Clear();
+            driver.FindElement(By.Name("user")).SendKeys(account.Username1);
+            driver.FindElement(By.Name("pass")).Click();
+            driver.FindElement(By.Name("pass")).Clear();
+            driver.FindElement(By.Name("pass")).SendKeys(account.Password1);
+        }
+        protected void OpenContactPage()
+        {
+            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
+        }
 
         protected void SubmitTheNewGroupAndReturnToTheGroupPage()
         {
@@ -72,6 +86,16 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("group_footer")).Click();
             driver.FindElement(By.Name("group_footer")).Clear();
             driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
+        }
+        protected void FillOutContactInformation(ContactData group)
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
+            driver.FindElement(By.Name("firstname")).Click();
+            driver.FindElement(By.Name("firstname")).Clear();
+            driver.FindElement(By.Name("firstname")).SendKeys(group.Fname);
+            driver.FindElement(By.Name("lastname")).Click();
+            driver.FindElement(By.Name("lastname")).Clear();
+            driver.FindElement(By.Name("lastname")).SendKeys(group.Lname);
         }
 
         protected void InitNewGroupsCreation()
@@ -93,6 +117,10 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("pass")).SendKeys("qwerty");
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
+        protected void SubmitNewContact()
+        {
+            driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+        }
 
         protected void ReturnToGroupPage()
         {
@@ -108,6 +136,11 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/span[" + index + "]/input")).Click();
         }
+        protected void Logout()
+        {
+            driver.FindElement(By.LinkText("Logout")).Click();
+        }
+
 
     }
 }
