@@ -35,6 +35,12 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
             return this;
         }
+        public ContactHelper CreateContact(ContactData group)
+        {
+            manager.Contacts.FillOutContactInformation(group);
+            SubmitNewContact();
+            return this;
+        }
 
     }
 }

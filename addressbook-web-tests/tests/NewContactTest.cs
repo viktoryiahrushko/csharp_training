@@ -15,15 +15,16 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreationTest()
         {
-            
+
             ContactData group = new ContactData("Victoria");
             group.Lname = "Vysotsky";
-            app.Contacts
-                .FillOutContactInformation(group)
-                .SubmitNewContact();
+            
+            app.Contacts.CreateContact(group);
             app.Logouts.Logout();
-        
+
         }
+
+       
     }
 }
 
