@@ -17,12 +17,8 @@ namespace WebAddressbookTests
         [Test]
         public void RemoveGroupTest()
         {
-            GoToHomePage();
-            Login(new AccountData("admin", "secret"));
-            GoToTheGroupPage();
-            SelectGroup(1);
-            RemoveGroup();
-            ReturnToGroupPage();
+            app.Groups.Remove(1);
+            
         }
 
        

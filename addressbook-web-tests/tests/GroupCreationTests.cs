@@ -11,27 +11,33 @@ namespace WebAddressbookTests
     public class GroupCreationTests : TestBase
 
     {
-        
+
         [Test]
         public void GroupCreationTest()
         {
-            GoToHomePage();
-            Login(new AccountData("admin", "secret"));
-            GoToTheGroupPage();
-            InitNewGroupsCreation();
+
             GroupData group = new GroupData("aaa");
             group.Header = "sss";
             group.Footer = "hhh";
-            FillOutTheNewGroupForm(group);
-            SubmitTheNewGroupAndReturnToTheGroupPage();
+
+            
+            app.Groups.Create(group);
         }
 
-        
-       
-        
+            [Test]
+            public void EmptyGroupCreationTest()
+            {
 
-       
+                GroupData group = new GroupData(" ");
+                group.Header = " ";
+                group.Footer = " ";
 
-       
+                
+                app.Groups.Create(group);
+
+            }
+
+
+        }
     }
-}
+
