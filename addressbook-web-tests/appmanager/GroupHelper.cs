@@ -23,13 +23,35 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToTheGroupPage();
 
-            SelectGroup(1);
+            SelectGroup(v);
             RemoveGroup();
             ReturnToGroupPage();
             return this;
         }
 
-       
+        public GroupHelper Modify(int v, GroupData newData)
+        {
+            manager.Navigator.GoToTheGroupPage();
+            SelectGroup(v);
+            InitGroupModification();
+            FillOutTheNewGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupPage();
+
+            return this;
+        }
+
+        public GroupHelper SubmitGroupModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        public  GroupHelper InitGroupModification()
+        {
+            driver.FindElement(By.Name("edit")).Click();
+            return this;
+        }
 
         public GroupHelper Create(GroupData group)
         {
