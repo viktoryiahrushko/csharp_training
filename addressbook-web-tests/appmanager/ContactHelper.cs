@@ -62,12 +62,9 @@ namespace WebAddressbookTests
         public ContactHelper FillOutContactInformation(ContactData group)
         {
             driver.FindElement(By.LinkText("add new")).Click();
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(group.Fname);
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(group.Lname);
+            Type(By.Name("firstname"), group.Fname);
+            Type(By.Name("lastname"), group.Lname);
+            
             return this;
         }
 

@@ -20,34 +20,25 @@ namespace WebAddressbookTests
         }
         public LoginHelper Login(AccountData account)
         {
-
-            driver.FindElement(By.Name("user")).Click();
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(account.Username);
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
+            Type(By.Name("user"), account.Username);
+            Type(By.Name("pass"), account.Password);
+            
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
             return this;
         }
         public LoginHelper Login(AccountContactData account)
         {
-
-            driver.FindElement(By.Name("user")).Click();
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(account.Username1);
-            driver.FindElement(By.Name("pass")).Click();
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(account.Password1);
+            Type(By.Name("user"), account.Username1);
+            Type(By.Name("pass"), account.Password1);
+            
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
             return this;
         }
         public LoginHelper LoginAsUser()
         {
-            driver.FindElement(By.Name("user")).Click();
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys("user");
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys("qwerty");
+            Type(By.Name("user"), "user");
+            Type(By.Name("pass"), "qwerty");
+            
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
             return this;
         }
