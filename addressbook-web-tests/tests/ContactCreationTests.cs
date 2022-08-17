@@ -9,7 +9,7 @@ namespace WebAddressbookTests
 
 {
     [TestFixture]
-    public class ContactCreationTests : TestBase
+    public class ContactCreationTests : AuthTestBase
     {
         
         [Test]
@@ -20,7 +20,7 @@ namespace WebAddressbookTests
             group.Lname = "Vysotsky";
             
             app.Contacts.CreateContact(group);
-            app.Logouts.Logout();
+     //       app.Logouts.Logout();
 
         }
 

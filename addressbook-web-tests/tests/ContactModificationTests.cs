@@ -9,7 +9,7 @@ namespace WebAddressbookTests.tests
 {
 
     [TestFixture]
-    public  class ContactModificationTests : TestBase
+    public  class ContactModificationTests : AuthTestBase
     {
         [Test]
         public void ContactModificationTest()
@@ -18,7 +18,7 @@ namespace WebAddressbookTests.tests
             newData.Lname = "Vysotski";
 
             app.Contacts.ModifyContact(1, newData);
-            app.Logouts.Logout();
+  //          app.Logouts.Logout();
             
         }
     }

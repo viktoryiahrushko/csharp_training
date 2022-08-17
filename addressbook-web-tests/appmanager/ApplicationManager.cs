@@ -15,7 +15,7 @@ namespace WebAddressbookTests
     public class ApplicationManager
     {
         protected IWebDriver driver;
-        private StringBuilder verificationErrors;
+        
         protected string baseURL;
 
         protected LoginHelper loginHelper;
@@ -42,22 +42,25 @@ namespace WebAddressbookTests
         {
             if (! app.IsValueCreated)
             {
-                app.Value = new ApplicationManager();
+                ApplicationManager newInstance = new ApplicationManager();
+                app.Value = newInstance;
+                newInstance.Navigator.GoToHomePage();
             }
             return app.Value;
         }
 
-        ~ApplicationManager()
+    
+
+        public void Stop()
         {
             try
             {
                 driver.Quit();
             }
-            catch (Exception)
+            catch
             {
-                // Ignore errors if unable to close the browser
+
             }
-            
         }
         public IWebDriver Driver 
         {

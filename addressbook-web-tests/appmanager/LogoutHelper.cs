@@ -18,10 +18,10 @@ namespace WebAddressbookTests
         {
             
         }
-        public LogoutHelper Logout()
-        {
-            driver.FindElement(By.LinkText("Logout")).Click();
-            return this;
-        }
+     //   public LogoutHelper Logout()
+      //  {
+      //      driver.FindElement(By.LinkText("Logout")).Click();
+      //      return this;
+     //   }
     }
 }
