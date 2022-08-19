@@ -56,24 +56,51 @@ namespace WebAddressbookTests
 
 
                 driver.FindElement(By.LinkText("Logout")).Click();
+                driver.FindElement(By.Name("user"));
             }
         }
 
-        public LoginHelper Login(AccountContactData account)
+        public void Login(AccountContactData account)
         {
+            if (IsLoggedIn())
+            {
+                if (IsLoggedIn(account))
+                {
+                    return;
+                }
+                LogoutFrom();
+            }
             Type(By.Name("user"), account.Username1);
             Type(By.Name("pass"), account.Password1);
             
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-            return this;
+            
         }
-        public LoginHelper LoginAsUser()
+
+        private bool IsLoggedIn(AccountContactData account)
         {
+            return IsLoggedIn()
+                && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text
+                == "(" + account.Username1 + ")";
+        }
+
+        public void LoginAsUser(AccountContactData account)
+        {
+
+            if (IsLoggedIn())
+            {
+                if (IsLoggedIn(account))
+                {
+                    return;
+                }
+                LogoutFrom();
+            }
+
             Type(By.Name("user"), "user");
             Type(By.Name("pass"), "qwerty");
             
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-            return this;
+            
         }
     }
 }
