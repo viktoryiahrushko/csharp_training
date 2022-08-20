@@ -17,14 +17,28 @@ namespace WebAddressbookTests
         {
         
         }
-
-        public ContactHelper RemoveContact(int v)
+        public bool IsContactPresent()
         {
+            
+            return IsElementPresent(By.XPath("//input[@type='checkbox']"));
+            
+
+        }
+
+        public void RemoveContact(int v)
+        {
+            if (!IsContactPresent())
+            {
+                //  CreateContact(contact);
+                return;
+            }
+            
             manager.Navigator.GoToHomePage();
             SelectContact(v);
             DeleteContact();
             driver.SwitchTo().Alert().Accept();
-            return this;
+
+
         }
         public ContactHelper SelectContact(int index)
         {
@@ -40,13 +54,20 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper ModifyContact(int v, ContactData newData)
+        public void ModifyContact(int v, ContactData contact)
         {
-            manager.Navigator.GoToHomePage();
-            InitContactModification();
-            FillOutContactInformation(newData);
+            if (IsContactPresent())
+            {
+                manager.Navigator.GoToHomePage();
+                SelectContact(v);
+                InitContactModification();
+                FillOutContactInformation(contact);
+                SubmitNewContact();
+
+            }
+            manager.Contacts.FillOutContactInformation(contact);
             SubmitNewContact();
-            return this;
+
         }
 
         public ContactHelper InitContactModification()
@@ -59,11 +80,11 @@ namespace WebAddressbookTests
 
         
 
-        public ContactHelper FillOutContactInformation(ContactData group)
+        public ContactHelper FillOutContactInformation(ContactData contact)
         {
             driver.FindElement(By.LinkText("add new")).Click();
-            Type(By.Name("firstname"), group.Fname);
-            Type(By.Name("lastname"), group.Lname);
+            Type(By.Name("firstname"), contact.Fname);
+            Type(By.Name("lastname"), contact.Lname);
             
             return this;
         }
@@ -74,9 +95,9 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
             return this;
         }
-        public ContactHelper CreateContact(ContactData group)
+        public ContactHelper CreateContact(ContactData contact)
         {
-            manager.Contacts.FillOutContactInformation(group);
+            manager.Contacts.FillOutContactInformation(contact);
             SubmitNewContact();
             return this;
         }

@@ -19,26 +19,59 @@ namespace WebAddressbookTests
             
         }
 
-        public GroupHelper Remove(int v)
+        public void Remove(int v)
         {
             manager.Navigator.GoToTheGroupPage();
 
-            SelectGroup(v);
-            RemoveGroup();
-            ReturnToGroupPage();
+            if (IsGroupPresent())
+            {
+                SelectGroup(v);
+                RemoveGroup();
+                ReturnToGroupPage();
+            }
+
+            
+            
+            
+
+
+        }
+
+        public bool IsGroupPresent()
+        {
+            //return IsElementPresent(By.XPath("//input[@type='checkbox']"));
+            return IsElementPresent(By.Name("selected[]"));
+
+        }
+        public GroupHelper Create(GroupData group)
+        {
+            manager.Navigator.GoToTheGroupPage();
+            InitNewGroupsCreation();
+            FillOutTheNewGroupForm(group);
+            SubmitTheNewGroupAndReturnToTheGroupPage();
             return this;
         }
 
-        public GroupHelper Modify(int v, GroupData newData)
+        public void Modify(int v, GroupData newData)
         {
             manager.Navigator.GoToTheGroupPage();
+
+            if (!IsGroupPresent())
+            {
+                InitNewGroupsCreation();
+                FillOutTheNewGroupForm(newData);
+                SubmitTheNewGroupAndReturnToTheGroupPage();
+
+
+            }
+
+            
             SelectGroup(v);
             InitGroupModification();
             FillOutTheNewGroupForm(newData);
             SubmitGroupModification();
             ReturnToGroupPage();
 
-            return this;
         }
 
         public GroupHelper SubmitGroupModification()
@@ -53,15 +86,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper Create(GroupData group)
-        {
-            manager.Navigator.GoToTheGroupPage();
-            InitNewGroupsCreation();
-            FillOutTheNewGroupForm(group);
-            SubmitTheNewGroupAndReturnToTheGroupPage();
-            return this;
-        }
-        
+       
         public GroupHelper SubmitTheNewGroupAndReturnToTheGroupPage()
         {
             driver.FindElement(By.Name("submit")).Click();
@@ -95,11 +120,17 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper RemoveGroup()
+        public void RemoveGroup()
         {
-            driver.FindElement(By.Name("delete")).Click();
-            return this;
+            if (IsGroupPresent())
+            {
+                driver.FindElement(By.Name("delete")).Click();
+            }
+            
+            
         }
+
+       
 
         public GroupHelper SelectGroup(int index)
         {

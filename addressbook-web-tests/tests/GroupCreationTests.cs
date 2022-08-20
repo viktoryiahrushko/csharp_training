@@ -15,16 +15,17 @@ namespace WebAddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-
+           
             GroupData group = new GroupData("aaa");
             group.Header = "sss";
             group.Footer = "hhh";
 
-            
+
             app.Groups.Create(group);
         }
+    
 
-            [Test]
+        [Test]
             public void EmptyGroupCreationTest()
             {
 
