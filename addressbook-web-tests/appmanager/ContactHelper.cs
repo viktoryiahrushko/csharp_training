@@ -19,24 +19,21 @@ namespace WebAddressbookTests
         }
         public bool IsContactPresent()
         {
-            
-            return IsElementPresent(By.XPath("//input[@type='checkbox']"));
-            
+
+            return IsElementPresent(By.Name("selected[]"));
+
 
         }
 
-        public void RemoveContact(int v)
+        public ContactHelper RemoveContact(int v)
         {
-            if (!IsContactPresent())
-            {
-                //  CreateContact(contact);
-                return;
-            }
+           
             
             manager.Navigator.GoToHomePage();
             SelectContact(v);
             DeleteContact();
             driver.SwitchTo().Alert().Accept();
+            return this;
 
 
         }
@@ -54,19 +51,17 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public void ModifyContact(int v, ContactData contact)
+        public ContactHelper ModifyContact(int v, ContactData newdata)
         {
-            if (IsContactPresent())
-            {
+            
                 manager.Navigator.GoToHomePage();
                 SelectContact(v);
+                FillOutContactInformation(newdata);
                 InitContactModification();
-                FillOutContactInformation(contact);
                 SubmitNewContact();
+            return this;
 
-            }
-            manager.Contacts.FillOutContactInformation(contact);
-            SubmitNewContact();
+          
 
         }
 
@@ -76,13 +71,10 @@ namespace WebAddressbookTests
             return this;
         }
 
-        
-
-        
-
+      
         public ContactHelper FillOutContactInformation(ContactData contact)
         {
-            driver.FindElement(By.LinkText("add new")).Click();
+           // driver.FindElement(By.LinkText("add new")).Click();
             Type(By.Name("firstname"), contact.Fname);
             Type(By.Name("lastname"), contact.Lname);
             

@@ -17,13 +17,17 @@ namespace WebAddressbookTests
         [Test]
         public void RemoveGroupTest()
         {
-           
+           if (!app.Groups.IsGroupPresent())
+            {
+                app.Groups.Create(GroupData group);
+            }
             app.Groups.Remove(1);
             
         }
+      
 
-       
-        
-       
+
+
+
     }
 }

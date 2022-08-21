@@ -16,11 +16,11 @@ namespace WebAddressbookTests
         public void ContactCreationTest()
         {
 
-            ContactData group = new ContactData("Victoria");
-            group.Lname = "Vysotsky";
+            ContactData contact = new ContactData("Victoria");
+            contact.Lname = "Vysotsky";
             
-            app.Contacts.CreateContact(group);
-     //       app.Logouts.Logout();
+            app.Contacts.CreateContact(contact);
+    
 
         }
 
