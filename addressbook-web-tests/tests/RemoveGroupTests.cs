@@ -19,7 +19,11 @@ namespace WebAddressbookTests
         {
            if (!app.Groups.IsGroupPresent())
             {
-                app.Groups.Create(GroupData group);
+                GroupData group = new GroupData("aaa");
+                group.Header = "sss";
+                group.Footer = "hhh";
+                app.Groups.Create(group);
+                
             }
             app.Groups.Remove(1);
             

@@ -56,10 +56,10 @@ namespace WebAddressbookTests
             
                 manager.Navigator.GoToHomePage();
                 SelectContact(v);
-                FillOutContactInformation(newdata);
                 InitContactModification();
+                FillOutContactInformationModify(newdata);
                 SubmitNewContact();
-            return this;
+                return this;
 
           
 
@@ -74,12 +74,21 @@ namespace WebAddressbookTests
       
         public ContactHelper FillOutContactInformation(ContactData contact)
         {
-           // driver.FindElement(By.LinkText("add new")).Click();
+           driver.FindElement(By.LinkText("add new")).Click();
             Type(By.Name("firstname"), contact.Fname);
             Type(By.Name("lastname"), contact.Lname);
             
             return this;
         }
+        public ContactHelper FillOutContactInformationModify(ContactData newData)
+        {
+            
+            Type(By.Name("firstname"), newData.Fname);
+            Type(By.Name("lastname"), newData.Lname);
+
+            return this;
+        }
+
 
 
         public ContactHelper SubmitNewContact()

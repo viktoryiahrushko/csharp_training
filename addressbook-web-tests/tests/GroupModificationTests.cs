@@ -16,10 +16,12 @@ namespace WebAddressbookTests
         {
             if (!app.Groups.IsGroupPresent())
             {
-                app.Groups.Create(GroupData group);
+                GroupData group = new GroupData("aaa");
+                group.Header = "sss";
+                group.Footer = "hhh";
+
+                app.Groups.Create(group);
           
-
-
             }
             GroupData newData = new GroupData("zzz");
             newData.Header = null;

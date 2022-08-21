@@ -16,13 +16,16 @@ namespace WebAddressbookTests.tests
         {
             if (!app.Contacts.IsContactPresent())
             {
-                
+                ContactData contact = new ContactData("Victoria");
+                contact.Lname = "Vysotsky";
 
-                app.Contacts.CreateContact(ContactData contact);
+                app.Contacts.CreateContact(contact);
             }
-            
+
             ContactData newData = new ContactData("Dzmitry");
             newData.Lname = "Vysotski";
+
+            
 
             app.Contacts.ModifyContact(1, newData);
   //          app.Logouts.Logout();
