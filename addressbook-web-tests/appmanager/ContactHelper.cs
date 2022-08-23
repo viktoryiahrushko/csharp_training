@@ -50,6 +50,8 @@ namespace WebAddressbookTests
             SelectContact(v);
             DeleteContact();
             driver.SwitchTo().Alert().Accept();
+          
+            driver.FindElement(By.CssSelector("div.msgbox"));
             return this;
 
 
