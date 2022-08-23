@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -25,13 +26,15 @@ namespace WebAddressbookTests
                 app.Groups.Create(group);
                 
             }
-            app.Groups.Remove(1);
-            
+
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            app.Groups.Remove(2);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            Assert.AreEqual(oldGroups.Count - 1, newGroups.Count);
+
         }
       
-
-
-
 
     }
 }

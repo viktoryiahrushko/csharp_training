@@ -31,9 +31,24 @@ namespace WebAddressbookTests
       
         }
 
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+
+            manager.Navigator.GoToTheGroupPage();
+
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements)
+            {
+                GroupData group = new GroupData(element.Text);
+                groups.Add(group);
+            }
+            return groups;
+        }
+
         public bool IsGroupPresent()
         {
-            //return IsElementPresent(By.XPath("//input[@type='checkbox']"));
+            
             return IsElementPresent(By.Name("selected[]"));
 
         }
@@ -97,8 +112,6 @@ namespace WebAddressbookTests
             return this;
         }
 
-       
-
         public GroupHelper ReturnToGroupPage()
         {
             driver.FindElement(By.LinkText("groups")).Click();
@@ -107,12 +120,9 @@ namespace WebAddressbookTests
 
         public void RemoveGroup()
         {
-       //     if (IsGroupPresent())
-       //     {
+     
                 driver.FindElement(By.Name("delete")).Click();
-       //     }
-            
-            
+       
         }
 
        

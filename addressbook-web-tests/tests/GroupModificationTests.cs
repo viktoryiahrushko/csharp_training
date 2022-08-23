@@ -21,13 +21,17 @@ namespace WebAddressbookTests
                 group.Footer = "hhh";
 
                 app.Groups.Create(group);
-          
+
             }
             GroupData newData = new GroupData("zzz");
             newData.Header = null;
             newData.Footer = null;
 
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Modify(1, newData);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            Assert.AreEqual(oldGroups.Count, newGroups.Count);
         }
     }
 }

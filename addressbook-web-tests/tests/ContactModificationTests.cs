@@ -25,11 +25,15 @@ namespace WebAddressbookTests.tests
             ContactData newData = new ContactData("Dzmitry");
             newData.Lname = "Vysotski";
 
-            
 
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.ModifyContact(1, newData);
-  //          app.Logouts.Logout();
-            
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            Assert.AreEqual(oldContacts.Count, newContacts.Count);
         }
+
+
     }
-}
+    }
+

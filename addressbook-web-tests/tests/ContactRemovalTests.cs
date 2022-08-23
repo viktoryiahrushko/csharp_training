@@ -23,7 +23,14 @@ namespace WebAddressbookTests.tests
                 contact.Lname = "Vysotsky";
                 app.Contacts.CreateContact(contact);
             }
-            app.Contacts.RemoveContact(17);
+
+           
+
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            app.Contacts.RemoveContact(1);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+           Assert.AreEqual(oldContacts.Count - 1, newContacts.Count);
         }
         
     }

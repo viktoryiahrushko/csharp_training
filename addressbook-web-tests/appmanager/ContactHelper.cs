@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
+
 namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
@@ -25,6 +26,22 @@ namespace WebAddressbookTests
 
         }
 
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+
+            manager.Navigator.GoToHomePage();
+
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//input[@type='checkbox']"));
+                //driver.FindElements(By.CssSelector("td.center"));
+            foreach (IWebElement element in elements)
+            {
+                ContactData contact = new ContactData(element.Text);
+                contacts.Add(contact);
+            }
+            return contacts;
+        }
+
         public ContactHelper RemoveContact(int v)
         {
            
@@ -41,6 +58,7 @@ namespace WebAddressbookTests
         {
             
             driver.FindElement(By.XPath("//input[@type='checkbox']")).Click();
+            //driver.FindElement(By.XPath("//div[@id='content']/form/table/[" + index + "]/input")).Click();
 
             return this;
         }
