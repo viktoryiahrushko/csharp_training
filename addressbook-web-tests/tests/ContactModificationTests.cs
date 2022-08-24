@@ -27,10 +27,13 @@ namespace WebAddressbookTests.tests
 
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
-            app.Contacts.ModifyContact(1, newData);
+            app.Contacts.ModifyContact(0, newData);
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
-            Assert.AreEqual(oldContacts.Count, newContacts.Count);
+            oldContacts[0].Fname = newData.Fname;
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
 
 

@@ -27,11 +27,12 @@ namespace WebAddressbookTests.tests
            
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
-            app.Contacts.RemoveContact(1);
+            app.Contacts.RemoveContact(0);
 
 
            List<ContactData> newContacts = app.Contacts.GetContactList();
-           Assert.AreEqual(oldContacts.Count - 1, newContacts.Count);
+           oldContacts.RemoveAt(0);
+           Assert.AreEqual(oldContacts, newContacts);
         }
         
     }
