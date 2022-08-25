@@ -34,6 +34,7 @@ namespace WebAddressbookTests
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
             oldContacts[0].Fname = newData.Fname;
+            oldContacts[0].Lname = newData.Lname;
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
@@ -43,6 +44,8 @@ namespace WebAddressbookTests
                 if (contact.Id == oldData.Id)
                 {
                     Assert.AreEqual(newData.Fname, contact.Fname);
+                    Assert.AreEqual(newData.Lname, contact.Lname);
+
 
                 }
             }

@@ -26,7 +26,8 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-            return Fname == other.Fname;
+            return Fname == other.Fname && Lname == other.Lname;
+          //  return Fname == other.Fname;
         }
 
         public override int GetHashCode()

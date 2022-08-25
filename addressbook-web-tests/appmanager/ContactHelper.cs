@@ -33,12 +33,14 @@ namespace WebAddressbookTests
             {
                 contactCache = new List<ContactData>();
                 manager.Navigator.GoToHomePage();
-                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//input[@type='checkbox']"));
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
+
                 //driver.FindElements(By.CssSelector("td.center"));
                 foreach (IWebElement element in elements)
                 {
 
-
+                    IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                    
                     contactCache.Add(new ContactData(element.Text) { 
                          Id = element.FindElement(By.TagName("input")).GetAttribute("value")
                     });
@@ -71,9 +73,11 @@ namespace WebAddressbookTests
         }
         public ContactHelper SelectContact(int index)
         {
+
             
             driver.FindElement(By.XPath("//input[@type='checkbox']")).Click();
-            //driver.FindElement(By.XPath("//div[@id='content']/form/table/[" + index + "]/input")).Click();
+            //driver.FindElement(By.XPath("//div[@id='content']/form/table/tbody/td[" + index + "]/input")).Click();
+            
 
             return this;
         }
