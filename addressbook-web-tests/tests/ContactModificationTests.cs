@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace WebAddressbookTests.tests
+namespace WebAddressbookTests
 {
 
     [TestFixture]
@@ -27,13 +27,25 @@ namespace WebAddressbookTests.tests
 
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
+            ContactData oldData = oldContacts[0];
             app.Contacts.ModifyContact(0, newData);
+
+            Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
             oldContacts[0].Fname = newData.Fname;
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in newContacts)
+            {
+                if (contact.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newData.Fname, contact.Fname);
+
+                }
+            }
         }
 
 

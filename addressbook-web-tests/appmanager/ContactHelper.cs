@@ -25,21 +25,34 @@ namespace WebAddressbookTests
 
 
         }
+        private List<ContactData> contactCache = null;
 
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-
-            manager.Navigator.GoToHomePage();
-
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//input[@type='checkbox']"));
-                //driver.FindElements(By.CssSelector("td.center"));
-            foreach (IWebElement element in elements)
+            if (contactCache == null)
             {
-                ContactData contact = new ContactData(element.Text);
-                contacts.Add(contact);
+                contactCache = new List<ContactData>();
+                manager.Navigator.GoToHomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//input[@type='checkbox']"));
+                //driver.FindElements(By.CssSelector("td.center"));
+                foreach (IWebElement element in elements)
+                {
+
+
+                    contactCache.Add(new ContactData(element.Text) { 
+                         Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+                }
             }
-            return contacts;
+
+       //     List<ContactData> contacts = new List<ContactData>();
+
+            return new List<ContactData>(contactCache);
+        }
+
+        public int GetContactCount()
+        {
+            return driver.FindElements(By.XPath("//input[@type='checkbox']")).Count;
         }
 
         public ContactHelper RemoveContact(int v)
@@ -67,7 +80,8 @@ namespace WebAddressbookTests
         public ContactHelper DeleteContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
-           
+            contactCache = null;
+
             return this;
         }
 
@@ -114,6 +128,7 @@ namespace WebAddressbookTests
         public ContactHelper SubmitNewContact()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            contactCache = null;
             return this;
         }
         public ContactHelper CreateContact(ContactData contact)

@@ -8,11 +8,10 @@ namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string fname;
-        private string lname = " ";
+       
         public ContactData(string fname)
         {
-            this.fname = fname;
+            Fname = fname;
             
            
         }
@@ -50,27 +49,10 @@ namespace WebAddressbookTests
             return Fname.CompareTo(other.Fname);
         }
 
-        public string Fname
-        {
-            get
-            {
-                return fname;
-            }
-            set
-            {
-                fname = value;
-            }
-        }
-        public string Lname
-        {
-            get
-            {
-                return lname;
-            }
-            set
-            {
-                lname = value;
-            }
-        }
+        public string Fname { get; set; }
+        
+        public string Lname { get; set; }
+
+        public string Id { get; set; }
     }
 }
