@@ -29,8 +29,10 @@ namespace WebAddressbookTests
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             ContactData oldData = oldContacts[0];
             app.Contacts.ModifyContact(0, newData);
+            app.Contacts.ReturnToHomePage();
 
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
+
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
             oldContacts[0].Fname = newData.Fname;

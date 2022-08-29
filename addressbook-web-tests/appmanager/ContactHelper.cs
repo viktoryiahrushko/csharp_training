@@ -31,6 +31,7 @@ namespace WebAddressbookTests
         {
             if (contactCache == null)
             {
+                
                 contactCache = new List<ContactData>();
                 manager.Navigator.GoToHomePage();
                 ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
@@ -38,23 +39,30 @@ namespace WebAddressbookTests
                 //driver.FindElements(By.CssSelector("td.center"));
                 foreach (IWebElement element in elements)
                 {
-
-                    IList<IWebElement> cells = element.FindElements(By.TagName("td"));
                     
-                    contactCache.Add(new ContactData(element.Text) { 
-                         Id = element.FindElement(By.TagName("input")).GetAttribute("value")
-                    });
+                    IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                    string lastname = cells[1].Text;
+                    string firstname = cells[2].Text;
+
+
+
+                    contactCache.Add(new ContactData(firstname) { 
+                      
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value"),
+                        Lname = lastname
+                });
+                    
                 }
             }
 
-       //     List<ContactData> contacts = new List<ContactData>();
+      
 
             return new List<ContactData>(contactCache);
         }
 
         public int GetContactCount()
         {
-            return driver.FindElements(By.XPath("//input[@type='checkbox']")).Count;
+            return driver.FindElements(By.XPath("//tr[@name='entry']")).Count;
         }
 
         public ContactHelper RemoveContact(int v)
@@ -99,9 +107,8 @@ namespace WebAddressbookTests
                 SubmitNewContact();
                 return this;
 
-          
-
         }
+
 
         public ContactHelper InitContactModification()
         {
@@ -139,6 +146,11 @@ namespace WebAddressbookTests
         {
             manager.Contacts.FillOutContactInformation(contact);
             SubmitNewContact();
+            return this;
+        }
+        public ContactHelper ReturnToHomePage()
+        {
+            driver.FindElement(By.LinkText("home")).Click();
             return this;
         }
 

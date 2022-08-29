@@ -12,9 +12,11 @@ namespace WebAddressbookTests
         public ContactData(string fname)
         {
             Fname = fname;
-            
-           
+         
         }
+
+        
+        
 
         public bool Equals(ContactData other)
         {
@@ -36,18 +38,24 @@ namespace WebAddressbookTests
             
         }
 
+
         public override string ToString()
         {
-            return "name=" + Fname;
+            return "name= " + Lname + " " + Fname;
         }
 
         public int CompareTo(ContactData other)
         {
-            if (Object.ReferenceEquals(other, null))
+            if (Object.ReferenceEquals(other, other))
             {
-                return 1;
+                return Fname.CompareTo(other.Fname);
+            }
+            if (Object.ReferenceEquals(this, other))
+            {
+                return Lname.CompareTo(other.Lname);
             }
             return Fname.CompareTo(other.Fname);
+            
         }
 
         public string Fname { get; set; }
@@ -55,5 +63,7 @@ namespace WebAddressbookTests
         public string Lname { get; set; }
 
         public string Id { get; set; }
+
+        
     }
 }

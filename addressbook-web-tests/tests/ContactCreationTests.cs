@@ -4,14 +4,16 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
 using System.Collections.Generic;
-
+using OpenQA.Selenium;
 
 namespace WebAddressbookTests
 
 {
+    
     [TestFixture]
     public class ContactCreationTests : AuthTestBase
     {
+
         
         [Test]
         public void ContactCreationTest()
@@ -22,8 +24,9 @@ namespace WebAddressbookTests
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.CreateContact(contact);
-
+            app.Contacts.ReturnToHomePage();
             
+
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
 
 
@@ -32,9 +35,6 @@ namespace WebAddressbookTests
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
-
-            
-
 
         }
         [Test]
@@ -46,6 +46,7 @@ namespace WebAddressbookTests
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.CreateContact(contact);
+            app.Contacts.ReturnToHomePage();
 
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
 
