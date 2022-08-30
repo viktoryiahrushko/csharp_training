@@ -104,7 +104,7 @@ namespace WebAddressbookTests
                 SelectContact(v);
                 InitContactModification();
                 FillOutContactInformationModify(newdata);
-                SubmitNewContact();
+                SubmitModifiedContact();
                 return this;
 
         }
@@ -151,6 +151,12 @@ namespace WebAddressbookTests
         public ContactHelper ReturnToHomePage()
         {
             driver.FindElement(By.LinkText("home")).Click();
+            return this;
+        }
+        public ContactHelper SubmitModifiedContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Update']")).Click();
+            contactCache = null;
             return this;
         }
 
