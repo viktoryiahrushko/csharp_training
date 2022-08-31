@@ -46,16 +46,16 @@ namespace WebAddressbookTests
 
         public int CompareTo(ContactData other)
         {
-            if (Object.ReferenceEquals(other, other))
+            if (Object.ReferenceEquals(other, null))
             {
-                return Fname.CompareTo(other.Fname);
+                return 1;
             }
-            if (Object.ReferenceEquals(this, other))
+            if (!Object.ReferenceEquals(other.Lname, Lname))
             {
                 return Lname.CompareTo(other.Lname);
             }
             return Fname.CompareTo(other.Fname);
-            
+
         }
 
         public string Fname { get; set; }

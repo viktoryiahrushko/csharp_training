@@ -23,7 +23,7 @@ namespace WebAddressbookTests
             }
 
             ContactData newData = new ContactData("Dzmitry");
-            newData.Lname = "Vysotski";
+            newData.Lname = "Vysotsk";
 
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
