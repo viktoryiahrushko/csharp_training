@@ -65,10 +65,12 @@
     <Compile Include="model\AccountData.cs" />
     <Compile Include="appmanager\ApplicationManager.cs" />
     <Compile Include="TestSuiteFixture.cs" />
+    <Compile Include="tests\ContactDetailedInformationTest.cs" />
     <Compile Include="tests\ContactInformationTest.cs" />
     <Compile Include="tests\ContactModificationTests.cs" />
     <Compile Include="tests\ContactRemovalTests.cs" />
     <Compile Include="tests\GroupModificationTests.cs" />
+    <Compile Include="tests\SearchTests.cs" />
     <Compile Include="unittest\Circle.cs" />
     <Compile Include="model\ContactData.cs" />
     <Compile Include="appmanager\ContactHelper.cs" />

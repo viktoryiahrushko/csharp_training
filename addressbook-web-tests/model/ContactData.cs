@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace WebAddressbookTests
@@ -11,6 +12,7 @@ namespace WebAddressbookTests
         private string allPhones;
         private string allEmails;
         private string address;
+        private string fullinfo;
 
         public ContactData(string fname, string lname)
         {
@@ -18,11 +20,14 @@ namespace WebAddressbookTests
             Lname = lname;
             
         }
-
-        public ContactData(string firstname)
+        public ContactData(string lname)
         {
-            Firstname = firstname;
+            
+            Lname = lname;
+
         }
+
+
 
         public bool Equals(ContactData other)
         {
@@ -67,9 +72,7 @@ namespace WebAddressbookTests
         public string Fname { get; set; }
 
         public string Lname { get; set; }
-        public string Firstname { get; set; }
-
-        public string Lastname { get; set; }
+     
 
         public string Id { get; set; }
 
@@ -132,7 +135,9 @@ namespace WebAddressbookTests
                 return "";
             }
             return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
-            
+             // return Regex.Replace(phone, "[ -()]", "")  + "\r\n";
+
+
         }
 
         public string AllEmails
@@ -151,6 +156,28 @@ namespace WebAddressbookTests
             set
             {
                 allEmails = value;
+            }
+        }
+
+        public string FullInfo
+        {
+            get
+            {
+                if (FullInfo != null)
+                {
+                   
+                    return fullinfo;
+                }
+                else
+                {
+                    return (Fname + " " + Lname + "\r\n" + address + "\r\n" + "\r\n" +
+                        "H: " + HomePhone + "\r\n" + "M: " + MobilePhone + "\r\n" + "W: " + WorkPhone + "\r\n" + "\r\n" +
+                     EmailFirst + "\r\n" + EmailSecond + "\r\n" + EmailThird).Trim();
+                }
+            }
+            set
+            {
+                fullinfo = value;
             }
         }
 
