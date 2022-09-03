@@ -13,10 +13,10 @@ namespace WebAddressbookTests
         [Test]
         public void TestContactDetailedInformation()
         {
-            ContactData fromPage = app.Contacts.GetContactDetailedInformationFromDetailsPage(0);
+            ContactData fromPage = app.Contacts.GetContactDetailedInformationFromDetailsPage();
             ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
 
-            Assert.AreEqual(fromPage, fromForm);
+          
           Assert.AreEqual(fromPage.FullInfo, fromForm.FullInfo);
             
 

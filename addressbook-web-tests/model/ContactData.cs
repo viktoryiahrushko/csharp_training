@@ -20,13 +20,17 @@ namespace WebAddressbookTests
             Lname = lname;
             
         }
-        public ContactData(string lname)
+        //   public ContactData(string lname)
+        //  {
+
+        //     Lname = lname;
+
+        // }
+
+        public ContactData(string fullinfo)
         {
-            
-            Lname = lname;
-
+            FullInfo = fullinfo;
         }
-
 
 
         public bool Equals(ContactData other)

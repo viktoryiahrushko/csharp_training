@@ -21,7 +21,7 @@ namespace WebAddressbookTests
         public void TestData()
         {
             Console.Out.Write(app.Contacts.GetContactInformationFromEditForm(0));
-            Console.Out.Write(app.Contacts.GetContactDetailedInformationFromDetailsPage(0));
+            Console.Out.Write(app.Contacts.GetContactDetailedInformationFromDetailsPage());
         }
     }
 }

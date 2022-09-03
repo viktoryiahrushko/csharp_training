@@ -177,13 +177,14 @@ namespace WebAddressbookTests
             string address = cells[3].Text;
             string allEmails = cells[4].Text;
             string allPhones = cells[5].Text;
+          
 
-            return new ContactData(fname, lname)
+            return new ContactData(lname, fname)
             {
                 Address = address,
                 AllPhones = allPhones,
-                AllEmails = allEmails
-
+                AllEmails = allEmails,
+            
 
             };
 
@@ -236,7 +237,7 @@ namespace WebAddressbookTests
 
 
 
-        public ContactData GetContactDetailedInformationFromDetailsPage(int index)
+        public ContactData GetContactDetailedInformationFromDetailsPage()
         {
             manager.Navigator.GoToHomePage();
             InitContactDetailsLookUp(0);
