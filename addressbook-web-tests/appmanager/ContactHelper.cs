@@ -30,7 +30,8 @@ namespace WebAddressbookTests
 
         }
         private List<ContactData> contactCache = null;
-
+        
+       
         public List<ContactData> GetContactList()
         {
             if (contactCache == null)
@@ -50,11 +51,11 @@ namespace WebAddressbookTests
 
 
 
-                    contactCache.Add(new ContactData(fname)
+                    contactCache.Add(new ContactData(fname, lname)
                     {
 
-                        Id = element.FindElement(By.TagName("input")).GetAttribute("value"),
-                        Lname = lname
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                        
                     });
 
                 }
@@ -241,13 +242,21 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
             InitContactDetailsLookUp(0);
+
             string fullinfo = driver.FindElement(By.XPath("//div[@id='content']")).Text;
+
+          
+
 
 
 
 
             return new ContactData(fullinfo);
+
           
+           
+
+
 
         }
 
@@ -258,10 +267,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-        // public ContactData GetContactDetailedInformationFromForm(int index)
-        // {
-
-        //}
+       
 
 
 

@@ -15,9 +15,10 @@ namespace WebAddressbookTests
         {
             ContactData fromPage = app.Contacts.GetContactDetailedInformationFromDetailsPage();
             ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
+            
 
-          
-          Assert.AreEqual(fromPage.FullInfo, fromForm.FullInfo);
+
+            Assert.AreEqual(fromPage.FullInfo, fromForm.FullInfo);
             
 
         }

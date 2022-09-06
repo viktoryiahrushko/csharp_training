@@ -20,18 +20,14 @@ namespace WebAddressbookTests
             Lname = lname;
             
         }
-        //   public ContactData(string lname)
-        //  {
+           public ContactData(string lname)
+          {
 
-        //     Lname = lname;
+             Lname = lname;
 
-        // }
+         }
 
-        public ContactData(string fullinfo)
-        {
-            FullInfo = fullinfo;
-        }
-
+     
 
         public bool Equals(ContactData other)
         {
@@ -167,16 +163,16 @@ namespace WebAddressbookTests
         {
             get
             {
-                if (FullInfo != null)
+                if (fullinfo != null)
                 {
-                   
+
                     return fullinfo;
                 }
                 else
                 {
-                    return (Fname + " " + Lname + "\r\n" + address + "\r\n" + "\r\n" +
-                        "H: " + HomePhone + "\r\n" + "M: " + MobilePhone + "\r\n" + "W: " + WorkPhone + "\r\n" + "\r\n" +
-                     EmailFirst + "\r\n" + EmailSecond + "\r\n" + EmailThird).Trim();
+                    return (Fname + " " + Lname + "\r\n" + Address + "\r\n" + "\r\n" +
+                         "H: " + HomePhone + "\r\n" + "M: " + MobilePhone + "\r\n" + "W: " + WorkPhone + "\r\n" + "\r\n" +
+                      EmailFirst + "\r\n" + EmailSecond + "\r\n" + EmailThird).Trim();
                 }
             }
             set
