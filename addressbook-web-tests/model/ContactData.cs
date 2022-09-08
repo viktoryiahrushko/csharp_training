@@ -13,6 +13,9 @@ namespace WebAddressbookTests
         private string allEmails;
         private string address;
         private string fullinfo;
+        private object mobilePhone;
+        private object homePhone;
+        private object workPhone;
 
         public ContactData(string fname, string lname)
         {
@@ -20,10 +23,10 @@ namespace WebAddressbookTests
             Lname = lname;
             
         }
-           public ContactData(string lname)
+           public ContactData(string fname)
           {
 
-             Lname = lname;
+             Fname = fname;
 
          }
 
@@ -168,9 +171,32 @@ namespace WebAddressbookTests
 
                     return fullinfo;
                 }
-                else
+                else 
                 {
+                    if (mobilePhone == null)
+                    {
+                        (Fname + " " + Lname + "\r\n" + Address + "\r\n" + "\r\n" +
+
+                         "H: " + HomePhone + "\r\n" + "\r\n" + "W: " + WorkPhone + "\r\n" + "\r\n" +
+                      EmailFirst + "\r\n" + EmailSecond + "\r\n" + EmailThird).Trim();
+                    }
+                    if (homePhone == null)
+                    {
+                        (Fname + " " + Lname + "\r\n" + Address + "\r\n" + "\r\n" +
+                        
+                          "\r\n" + "M: " + MobilePhone + "\r\n" + "W: " + WorkPhone + "\r\n" + "\r\n" +
+                      EmailFirst + "\r\n" + EmailSecond + "\r\n" + EmailThird).Trim();
+                    }
+                    if (workPhone == null)
+                    {
+                        (Fname + " " + Lname + "\r\n" + Address + "\r\n" + "\r\n" +
+
+                         "H: " + HomePhone + "\r\n" + "M: " + MobilePhone + "\r\n" +  "\r\n" + "\r\n" +
+                      EmailFirst + "\r\n" + EmailSecond + "\r\n" + EmailThird).Trim();
+                    }
+                    
                     return (Fname + " " + Lname + "\r\n" + Address + "\r\n" + "\r\n" +
+                        
                          "H: " + HomePhone + "\r\n" + "M: " + MobilePhone + "\r\n" + "W: " + WorkPhone + "\r\n" + "\r\n" +
                       EmailFirst + "\r\n" + EmailSecond + "\r\n" + EmailThird).Trim();
                 }

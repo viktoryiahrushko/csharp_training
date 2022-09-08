@@ -56,7 +56,7 @@ namespace WebAddressbookTests
 
                         Id = element.FindElement(By.TagName("input")).GetAttribute("value")
                         
-                    });
+                    }); 
 
                 }
             }
@@ -245,19 +245,10 @@ namespace WebAddressbookTests
 
             string fullinfo = driver.FindElement(By.XPath("//div[@id='content']")).Text;
 
-          
-
-
-
-
-
+        
             return new ContactData(fullinfo);
 
           
-           
-
-
-
         }
 
         public ContactHelper InitContactDetailsLookUp(int index)
