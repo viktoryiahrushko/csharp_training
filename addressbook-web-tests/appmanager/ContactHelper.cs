@@ -180,7 +180,7 @@ namespace WebAddressbookTests
             string allPhones = cells[5].Text;
           
 
-            return new ContactData(lname, fname)
+            return new ContactData(fname, lname)
             {
                 Address = address,
                 AllPhones = allPhones,
@@ -245,8 +245,11 @@ namespace WebAddressbookTests
 
             string fullinfo = driver.FindElement(By.XPath("//div[@id='content']")).Text;
 
-        
-            return new ContactData(fullinfo);
+
+            return new ContactData(null)
+            {
+                FullInfo = fullinfo
+            };
 
           
         }

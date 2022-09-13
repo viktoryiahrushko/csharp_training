@@ -16,21 +16,23 @@ namespace WebAddressbookTests
         private object mobilePhone;
         private object homePhone;
         private object workPhone;
+        private string result;
 
         public ContactData(string fname, string lname)
         {
             Fname = fname;
             Lname = lname;
-            
+
         }
-           public ContactData(string fname)
-          {
+        public ContactData(string fname)
+        {
 
-             Fname = fname;
+            Fname = fname;
 
-         }
+        }
 
-     
+
+
 
         public bool Equals(ContactData other)
         {
@@ -75,7 +77,7 @@ namespace WebAddressbookTests
         public string Fname { get; set; }
 
         public string Lname { get; set; }
-     
+
 
         public string Id { get; set; }
 
@@ -121,6 +123,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
+                    //return "H: " + HomePhone + "\r\n" + "M: " +  MobilePhone + "\r\n" + "W: " + WorkPhone.Trim();
                     return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim();
                 }
             }
@@ -136,9 +139,9 @@ namespace WebAddressbookTests
 
             {
                 return "";
-            }
+           }
             return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
-             // return Regex.Replace(phone, "[ -()]", "")  + "\r\n";
+             //return Regex.Replace(phone, "[ -()]", "")  + "\r\n";
 
 
         }
@@ -161,7 +164,6 @@ namespace WebAddressbookTests
                 allEmails = value;
             }
         }
-
         public string FullInfo
         {
             get
@@ -171,41 +173,112 @@ namespace WebAddressbookTests
 
                     return fullinfo;
                 }
-                else 
+                else
                 {
-                    if (mobilePhone == null)
+                    if (Fname != null)
                     {
-                        (Fname + " " + Lname + "\r\n" + Address + "\r\n" + "\r\n" +
-
-                         "H: " + HomePhone + "\r\n" + "\r\n" + "W: " + WorkPhone + "\r\n" + "\r\n" +
-                      EmailFirst + "\r\n" + EmailSecond + "\r\n" + EmailThird).Trim();
+                        result = result + Fname.Trim();
                     }
-                    if (homePhone == null)
+                    else
                     {
-                        (Fname + " " + Lname + "\r\n" + Address + "\r\n" + "\r\n" +
-                        
-                          "\r\n" + "M: " + MobilePhone + "\r\n" + "W: " + WorkPhone + "\r\n" + "\r\n" +
-                      EmailFirst + "\r\n" + EmailSecond + "\r\n" + EmailThird).Trim();
-                    }
-                    if (workPhone == null)
-                    {
-                        (Fname + " " + Lname + "\r\n" + Address + "\r\n" + "\r\n" +
-
-                         "H: " + HomePhone + "\r\n" + "M: " + MobilePhone + "\r\n" +  "\r\n" + "\r\n" +
-                      EmailFirst + "\r\n" + EmailSecond + "\r\n" + EmailThird).Trim();
+                        result = result.Trim();
                     }
                     
-                    return (Fname + " " + Lname + "\r\n" + Address + "\r\n" + "\r\n" +
+                    
+
+                    if (Lname != null )
+                    {
+                         result = result.Trim() + " " + Lname + "\r\n";
+                    }
+                    else
+                    {
+                        result = result.Trim();
+                    }
+                   
+
+                    if (Address != null)
+                    {
+                        result = result + Address + "\r\n" + "\r\n";
+
+                    }
+                    else
+                    {
+                        result = result.Trim();
+                    }
+
+
+                    if (HomePhone == null || HomePhone == "")
+                    {
+                        result = result.Trim();
+                    }
+                    else
+                    {
+                        result = result + "H: " + HomePhone + "\r\n";
+                    }
+                    if (MobilePhone == null || MobilePhone == "")
+                    {
+                        result = result.Trim();
+                    }
+                    else
+                    {
+                        result = result + "M: " + MobilePhone + "\r\n";
+                    }
+                    if (WorkPhone == null || WorkPhone == "")
+                    {
+                        result = result.Trim();
+                    }
+                    else
+                    {
+                        result = result + "W: " + WorkPhone + "\r\n";
+                    }
+
+                    if (EmailFirst == null || EmailFirst == "")
+                    {
                         
-                         "H: " + HomePhone + "\r\n" + "M: " + MobilePhone + "\r\n" + "W: " + WorkPhone + "\r\n" + "\r\n" +
-                      EmailFirst + "\r\n" + EmailSecond + "\r\n" + EmailThird).Trim();
+                    }
+                    else
+                    {
+                        result = result + "\r\n" + EmailFirst + "\r\n";
+                    }
+                     
+                    
+                    if (EmailSecond == null || EmailSecond == "")
+                    {
+                        result = result.Trim();
+                    }
+                    else
+                    { 
+                     result = result + "\r\n" + EmailSecond + "\r\n";
+                    }
+
+                    if (EmailThird == null || EmailThird == "")
+                    {
+                        result = result.Trim();
+                    }
+                    else
+                    {
+                        result = result  + EmailThird + "\r\n";
+                    }
+                    
+                }
+                
+
+                return result.Trim();
+                    
+                   
+                }
+                
+                set
+            {
+                    fullinfo = value;
                 }
             }
-            set
-            {
-                fullinfo = value;
-            }
-        }
+        
+   
+
+
+
+       
 
         public string CutEmailLines(string email)
         {
