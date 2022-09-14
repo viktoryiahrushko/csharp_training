@@ -5,11 +5,12 @@ using System.Threading;
 using NUnit.Framework;
 using System.Collections.Generic;
 using OpenQA.Selenium;
+using System.IO;
 
 namespace WebAddressbookTests
 
 {
-    
+
     [TestFixture]
     public class ContactCreationTests : AuthTestBase
     {
@@ -28,9 +29,26 @@ namespace WebAddressbookTests
             return contact;
 
         }
+        public static IEnumerable<ContactData> ContactDataFromFile()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            string[] lines = File.ReadAllLines(@"contacts.csv");
+            foreach (string l in lines)
+            {
+                string[] cparts = l.Split(',');
+                contacts.Add(new ContactData(cparts[0])
+                {
+                    Fname = cparts[1],
+                    Lname = cparts[2]
+                });
+            }
+            return contacts;
+        }
 
 
-              [Test, TestCaseSource("RandomContactDataProvider")]
+
+        [Test, TestCaseSource("ContactDataFromFile")]
+
               public void ContactCreationTest(ContactData contact)
                    {
              

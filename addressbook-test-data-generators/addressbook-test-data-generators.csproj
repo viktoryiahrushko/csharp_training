@@ -6,4 +6,8 @@
     <RootNamespace>addressbook_test_data_generators</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\addressbook-web-tests\addressbook-web-tests.csproj" />
+  </ItemGroup>
+
 </Project>
