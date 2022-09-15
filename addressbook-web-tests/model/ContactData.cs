@@ -16,7 +16,8 @@ namespace WebAddressbookTests
         private object mobilePhone;
         private object homePhone;
         private object workPhone;
-        private string result;
+        
+        
 
         public ContactData(string fname, string lname)
         {
@@ -93,6 +94,8 @@ namespace WebAddressbookTests
 
         public string EmailThird { get; set; }
 
+        public string nameAndAddress { get; set;  }
+
         public string Address
         {
             get
@@ -123,8 +126,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    //return "H: " + HomePhone + "\r\n" + "M: " +  MobilePhone + "\r\n" + "W: " + WorkPhone.Trim();
-                    return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim();
+                   return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim();
                 }
             }
             set
@@ -164,6 +166,8 @@ namespace WebAddressbookTests
                 allEmails = value;
             }
         }
+
+        
         public string FullInfo
         {
             get
@@ -175,76 +179,76 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    if (Fname != null)
+                   string result = "";
+                    
+                    
+                    
+                    if (Fname != null || Fname != "")
                     {
                         result = result + Fname.Trim();
                     }
                     else
                     {
-                        result = result.Trim();
-                    }
-                    
-                    
-
-                    if (Lname != null )
-                    {
-                         result = result.Trim() + " " + Lname + "\r\n";
-                    }
-                    else
-                    {
-                        result = result.Trim();
-                    }
-                   
-
-                    if (Address != null)
-                    {
-                        result = result + Address + "\r\n" + "\r\n";
-
-                    }
-                    else
-                    {
-                        result = result.Trim();
+                       
                     }
 
-
-                    if (HomePhone == null || HomePhone == "")
-                    {
-                        result = result.Trim();
-                    }
-                    else
-                    {
-                        result = result + "H: " + HomePhone + "\r\n";
-                    }
-                    if (MobilePhone == null || MobilePhone == "")
-                    {
-                        result = result.Trim();
-                    }
-                    else
-                    {
-                        result = result + "M: " + MobilePhone + "\r\n";
-                    }
-                    if (WorkPhone == null || WorkPhone == "")
-                    {
-                        result = result.Trim();
-                    }
-                    else
-                    {
-                        result = result + "W: " + WorkPhone + "\r\n";
-                    }
-
-                    if (EmailFirst == null || EmailFirst == "")
+                    if (Lname == null || Lname == "")
                     {
                         
                     }
                     else
                     {
-                        result = result + "\r\n" + EmailFirst + "\r\n";
+                        result = result.Trim() + " " + Lname;
+
+                    }
+
+                   
+                    if (Address == null || Address == "")
+                    {
+                        
+                    }
+                    else
+                    {
+                        result = result + "\r\n" + Address;
+                    }
+                    if (HomePhone == null || HomePhone == "")
+                    {
+                        result = result + "\r\n";
+                    }
+                    else
+                    {
+                        result = result + "\r\n\r\n" + "H: " + HomePhone;
+                    }
+                    if (MobilePhone == null || MobilePhone == "")
+                    {
+                        result = result + "\r\n";
+                    }
+                    else
+                    {
+                        result = result + "\r\n" + "M: " + MobilePhone + "\r\n";
+                    }
+
+                    if (WorkPhone == null || WorkPhone == "")
+                    {
+                      
+                    }
+                    else
+                    {
+                        result = result  + "W: " + WorkPhone ;
+                    }
+
+                    if (EmailFirst == null || EmailFirst == "")
+                    {
+                        result = result.Trim() + "\r\n" ;
+                    }
+                    else
+                    {
+                        result = result.Trim() + "\r\n\r\n" + EmailFirst ;
                     }
                      
-                    
                     if (EmailSecond == null || EmailSecond == "")
                     {
-                        result = result.Trim();
+                        result = result + "\r\n";
                     }
                     else
                     { 
@@ -253,25 +257,21 @@ namespace WebAddressbookTests
 
                     if (EmailThird == null || EmailThird == "")
                     {
-                        result = result.Trim();
+                      
                     }
                     else
                     {
-                        result = result  + EmailThird + "\r\n";
+                        result = result + EmailThird;
                     }
-                    
+                    return result.Trim();
                 }
                 
-
-                return result.Trim();
-                    
-                   
-                }
+            }
                 
                 set
             {
-                    fullinfo = value;
-                }
+                fullinfo = value;
+            }
             }
         
    
