@@ -31,6 +31,12 @@ namespace WebAddressbookTests
             Fname = fname;
 
         }
+        public ContactData()
+        {
+
+          
+
+        }
 
 
 
