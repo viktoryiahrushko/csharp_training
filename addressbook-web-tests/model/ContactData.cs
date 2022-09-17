@@ -100,13 +100,12 @@ namespace WebAddressbookTests
 
         public string EmailThird { get; set; }
 
-        public string nameAndAddress { get; set;  }
-
+        
         public string Address
         {
             get
             {
-                if (address != null)
+                if (address == null)
                 {
                     return address;
                 }
@@ -114,6 +113,7 @@ namespace WebAddressbookTests
                 {
                     return Address.Trim() + "\r\n";
                 }
+               
             }
             set
             {

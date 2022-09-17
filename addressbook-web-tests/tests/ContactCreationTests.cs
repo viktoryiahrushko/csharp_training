@@ -6,6 +6,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using OpenQA.Selenium;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace WebAddressbookTests
 
@@ -45,11 +46,20 @@ namespace WebAddressbookTests
             return contacts;
         }
 
+        public static IEnumerable<ContactData> ContactDataFromXmlFile()
+        {
+
+            return (List<ContactData>)
+                new XmlSerializer(typeof(List<ContactData>))
+                .Deserialize(new StreamReader(@"contacts.xml"));
+
+        }
 
 
-        [Test, TestCaseSource("ContactDataFromFile")]
+        [Test, TestCaseSource("ContactDataFromXmlFile")]
+        //[Test, TestCaseSource("ContactDataFromFile")]
 
-              public void ContactCreationTest(ContactData contact)
+        public void ContactCreationTest(ContactData contact)
                    {
              
                     
