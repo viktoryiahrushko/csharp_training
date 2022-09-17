@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using OpenQA.Selenium;
 using System.IO;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace WebAddressbookTests
 
@@ -54,38 +55,37 @@ namespace WebAddressbookTests
                 .Deserialize(new StreamReader(@"contacts.xml"));
 
         }
+        public static IEnumerable<ContactData> ContactDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<ContactData>>(
+                File.ReadAllText(@"contacts.json"));
 
 
-        [Test, TestCaseSource("ContactDataFromXmlFile")]
+        }
+
+        [Test, TestCaseSource("ContactDataFromJsonFile")]
+        //[Test, TestCaseSource("ContactDataFromXmlFile")]
         //[Test, TestCaseSource("ContactDataFromFile")]
 
         public void ContactCreationTest(ContactData contact)
-                   {
-             
-                    
-
-                       List<ContactData> oldContacts = app.Contacts.GetContactList();
-                       app.Contacts.CreateContact(contact);
-                       app.Contacts.ReturnToHomePage();
-
-
-                     Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
-
-
-                       List<ContactData> newContacts = app.Contacts.GetContactList();
-                      oldContacts.Add(contact);
-                      oldContacts.Sort();
-                      newContacts.Sort();
-                       Assert.AreEqual(oldContacts, newContacts);
-
-                   }
+        {
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            app.Contacts.CreateContact(contact);
+            app.Contacts.ReturnToHomePage();
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
+        }
 
         [Test, TestCaseSource("RandomContactDataProvider")]
         public void BadContactCreationTest(ContactData contact)
         {
 
-     //       ContactData contact = new ContactData("V'v");
-      //      contact.Lname = "Vysotsky";
+            //ContactData contact = new ContactData("V'v");
+            //contact.Lname = "Vysotsky";
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.CreateContact(contact);
