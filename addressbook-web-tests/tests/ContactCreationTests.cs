@@ -8,6 +8,7 @@ using OpenQA.Selenium;
 using System.IO;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace WebAddressbookTests
 
@@ -63,7 +64,33 @@ namespace WebAddressbookTests
 
         }
 
-        [Test, TestCaseSource("ContactDataFromJsonFile")]
+        public static IEnumerable<ContactData> ContactDataFromExcelFile()
+        {
+
+            List<ContactData> contacts = new List<ContactData>();
+            Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+            Excel.Workbook wb = app.Workbooks.Open(Path.Combine(Directory.GetCurrentDirectory(), @"contacts.xlsx"));
+            Excel.Worksheet sheet = wb.ActiveSheet;
+            Excel.Range range = sheet.UsedRange;
+            for (int i = 1; i <= range.Rows.Count; i++)
+            {
+                contacts.Add(new ContactData()
+                {
+                    Fname = range.Cells[i, 1].Value,
+                    Lname = range.Cells[i, 2].Value
+                    
+                });
+            }
+
+            wb.Close();
+            app.Visible = false;
+            app.Quit();
+            return contacts;
+
+        }
+
+        [Test, TestCaseSource("ContactDataFromExcelFile")]
+        //[Test, TestCaseSource("ContactDataFromJsonFile")]
         //[Test, TestCaseSource("ContactDataFromXmlFile")]
         //[Test, TestCaseSource("ContactDataFromFile")]
 

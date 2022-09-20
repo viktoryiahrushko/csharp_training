@@ -8,6 +8,7 @@ using WebAddressbookTests;
 using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using Excel = Microsoft.Office.Interop.Excel;
 
 
 namespace addressbook_test_data_generators
@@ -17,7 +18,7 @@ namespace addressbook_test_data_generators
         static void Main(string[] args)
         {
             int count = Convert.ToInt32(args[0]);
-            StreamWriter writer = new StreamWriter(args[1]);
+            string filename = args[1];
             string type = args[2];
             string format = args[3];
 
@@ -35,26 +36,37 @@ namespace addressbook_test_data_generators
 
                     });
 
-
                 }
-                if (format == "csv")
+                if (format == "excel")
                 {
-                    writeContactsToCsvFile(contacts, writer);
-                }
-                else if (format == "xml")
-                {
-                    writeContactsToXmlFile(contacts, writer);
-                }
-                else if (format == "json")
-                {
-                    writeContactsToJsonFile(contacts, writer);
+                    writeContactsToExcelFile(contacts, filename);
                 }
                 else
                 {
-                    System.Console.Out.Write("Unrecognized format " + format);
+                    StreamWriter writer = new StreamWriter(args[1]);
+
+                    if (format == "csv")
+                    {
+                        writeContactsToCsvFile(contacts, writer);
+                    }
+                    else if (format == "xml")
+                    {
+                        writeContactsToXmlFile(contacts, writer);
+                    }
+                    else if (format == "json")
+                    {
+                        writeContactsToJsonFile(contacts, writer);
+                    }
+                    else
+                    {
+                        System.Console.Out.Write("Unrecognized format " + format);
+                    }
+                    writer.Close();
                 }
-                writer.Close();
+
             }
+
+
 
 
             else if (type == "groups")
@@ -70,24 +82,33 @@ namespace addressbook_test_data_generators
 
 
                 }
-                if (format == "csv")
+                if (format == "excel")
                 {
-                    writeGroupsToCsvFile(groups, writer);
-                }
-                else if (format == "xml")
-                {
-                    writeGroupsToXmlFile(groups, writer);
-                }
-                else if (format == "json")
-                {
-                    writeGroupsToJsonFile(groups, writer);
+                    writeGroupsToExcelFile(groups, filename);
                 }
                 else
                 {
-                  Console.Out.Write("Unrecognized format " + format);
-                }
+                    StreamWriter writer = new StreamWriter(args[1]);
+                    if (format == "csv")
+                    {
+                        writeGroupsToCsvFile(groups, writer);
+                    }
+                    else if (format == "xml")
+                    {
+                        writeGroupsToXmlFile(groups, writer);
+                    }
+                    else if (format == "json")
+                    {
+                        writeGroupsToJsonFile(groups, writer);
+                    }
+                    else
+                    {
+                        Console.Out.Write("Unrecognized format " + format);
+                    }
+                    writer.Close();
 
-                writer.Close();
+                }
+                
             }
             else
             {
@@ -114,9 +135,29 @@ namespace addressbook_test_data_generators
             {
                 writer.Write(JsonConvert.SerializeObject(groups, Newtonsoft.Json.Formatting.Indented));
             }
-            static void writeContactsToJsonFile(List<ContactData> contacts, StreamWriter writer)
+
+
+            static void writeGroupsToExcelFile(List<GroupData> groups, string filename)
             {
-                writer.Write(JsonConvert.SerializeObject(contacts, Newtonsoft.Json.Formatting.Indented));
+                Excel.Application app = new Excel.Application();
+                app.Visible = true;
+                Excel.Workbook wb = app.Workbooks.Add();
+                Excel.Worksheet sheet = wb.ActiveSheet;
+                int row = 1;
+                foreach (GroupData group in groups)
+                {
+                    sheet.Cells[row, 1] = group.Name;
+                    sheet.Cells[row, 2] = group.Header;
+                    sheet.Cells[row, 3] = group.Footer;
+                    row++;
+                }
+                string fullPath = Path.Combine(Directory.GetCurrentDirectory(), filename);
+                File.Delete(fullPath);
+                wb.SaveAs2(fullPath);
+
+                wb.Close();
+                app.Visible = false;
+                app.Quit();
             }
 
 
@@ -134,7 +175,39 @@ namespace addressbook_test_data_generators
             {
                 new XmlSerializer(typeof(List<ContactData>)).Serialize(writer, contacts);
             }
+            static void writeContactsToJsonFile(List<ContactData> contacts, StreamWriter writer)
+            {
+                writer.Write(JsonConvert.SerializeObject(contacts, Newtonsoft.Json.Formatting.Indented));
+            }
+
+
+
+
+            static void writeContactsToExcelFile(List<ContactData> contacts, string filename)
+            {
+                Excel.Application app = new Excel.Application();
+                app.Visible = true;
+                Excel.Workbook wb = app.Workbooks.Add();
+                Excel.Worksheet sheet = wb.ActiveSheet;
+                int row = 1;
+                foreach (ContactData contact in contacts)
+                {
+                    sheet.Cells[row, 1] = contact.Fname;
+                    sheet.Cells[row, 2] = contact.Lname;
+                    row++;
+                }
+                string fullPath = Path.Combine(Directory.GetCurrentDirectory(), filename);
+                File.Delete(fullPath);
+                wb.SaveAs2(fullPath);
+
+                wb.Close();
+                app.Visible = false;
+            }
         }
+
+
+
+        
     }
 }
     
