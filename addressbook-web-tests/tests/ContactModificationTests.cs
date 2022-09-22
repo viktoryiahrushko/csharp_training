@@ -9,7 +9,7 @@ namespace WebAddressbookTests
 {
 
     [TestFixture]
-    public  class ContactModificationTests : AuthTestBase
+    public  class ContactModificationTests : ContactTestBase
     {
         [Test]
         public void ContactModificationTest()
@@ -26,27 +26,28 @@ namespace WebAddressbookTests
             newData.Lname = "Vysotsk";
 
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
-            ContactData oldData = oldContacts[0];
-            app.Contacts.ModifyContact(0, newData);
+            List<ContactData> oldContacts = ContactData.GetAll();
+
+            ContactData toBeModified = oldContacts[0];
+            app.Contacts.ModifyContact(toBeModified, newData);
             app.Contacts.ReturnToHomePage();
 
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
-            oldContacts[0].Fname = newData.Fname;
-            oldContacts[0].Lname = newData.Lname;
+            List<ContactData> newContacts = ContactData.GetAll();
+            toBeModified.Fname = newData.Fname;
+            toBeModified.Lname = newData.Lname;
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
 
             foreach (ContactData contact in newContacts)
             {
-                if (contact.Id == oldData.Id)
+                if (contact.Id == toBeModified.Id)
                 {
-                    Assert.AreEqual(newData.Fname, contact.Fname);
-                    Assert.AreEqual(newData.Lname, contact.Lname);
+                    Assert.AreEqual(newData.Fname, toBeModified.Fname);
+                    Assert.AreEqual(newData.Lname, toBeModified.Lname);
                    
 
                 }

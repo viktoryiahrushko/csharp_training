@@ -66,6 +66,7 @@ namespace WebAddressbookTests
             return new List<ContactData>(contactCache);
         }
 
+        
         public int GetContactCount()
         {
             return driver.FindElements(By.XPath("//tr[@name='entry']")).Count;
@@ -85,12 +86,34 @@ namespace WebAddressbookTests
 
 
         }
+
+        public ContactHelper RemoveContact(ContactData contact)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectContact(contact.Id);
+            DeleteContact();
+            driver.SwitchTo().Alert().Accept();
+
+            driver.FindElement(By.CssSelector("div.msgbox"));
+            return this;
+        }
+
+        public ContactHelper SelectContact(string id)
+        {
+            driver.FindElement(By.XPath("//input[@name='selected[]' and @value='" + id + "'])")).Click();
+
+
+            return this;
+        }
+
         public ContactHelper SelectContact(int index)
         {
 
 
             driver.FindElement(By.XPath("//input[@type='checkbox']")).Click();
             //driver.FindElement(By.XPath("//div[@id='content']/form/table/tbody/td[" + index + "]/input")).Click();
+            //driver.FindElement(By.XPath("//@type='checkbox' and @value='" + id + "'])")).Click();
+            
 
 
             return this;
@@ -103,6 +126,7 @@ namespace WebAddressbookTests
             return this;
         }
 
+
         public ContactHelper ModifyContact(int v, ContactData newdata)
         {
 
@@ -114,6 +138,16 @@ namespace WebAddressbookTests
             return this;
 
         }
+        public ContactHelper ModifyContact(ContactData contact, ContactData newData)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectContact(contact.Id);
+            InitContactModification();
+            FillOutContactInformationModify(newData);
+            SubmitModifiedContact();
+            return this;
+        }
+
 
 
         public ContactHelper InitContactModification()

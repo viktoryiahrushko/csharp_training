@@ -129,7 +129,9 @@
     <Compile Include="tests\ContactInformationTest.cs" />
     <Compile Include="tests\ContactModificationTests.cs" />
     <Compile Include="tests\ContactRemovalTests.cs" />
+    <Compile Include="tests\ContactTestBase.cs" />
     <Compile Include="tests\GroupModificationTests.cs" />
+    <Compile Include="tests\GroupTestBase.cs" />
     <Compile Include="tests\SearchTests.cs" />
     <Compile Include="unittest\Circle.cs" />
     <Compile Include="model\ContactData.cs" />
