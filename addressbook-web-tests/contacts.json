@@ -1,7 +1,7 @@
 [
   {
-    "Fname": "W\"^",
-    "Lname": "&>;)N8A&",
+    "Fname": "Test",
+    "Lname": "Vik",
     "Id": null,
     "HomePhone": null,
     "MobilePhone": null,
@@ -12,11 +12,11 @@
     "Address": null,
     "AllPhones": "",
     "AllEmails": "",
-    "FullInfo": "W\"^ &>;)N8A&"
+    "FullInfo": "Test Vik"
   },
   {
-    "Fname": ")L.",
-    "Lname": ";",
+    "Fname": "Dim",
+    "Lname": "Test",
     "Id": null,
     "HomePhone": null,
     "MobilePhone": null,
@@ -27,11 +27,11 @@
     "Address": null,
     "AllPhones": "",
     "AllEmails": "",
-    "FullInfo": ")L. ;"
+    "FullInfo": "Dim Test"
   },
   {
-    "Fname": "^M4",
-    "Lname": "-",
+    "Fname": "VikaDima",
+    "Lname": "TestingTest",
     "Id": null,
     "HomePhone": null,
     "MobilePhone": null,
@@ -42,6 +42,6 @@
     "Address": null,
     "AllPhones": "",
     "AllEmails": "",
-    "FullInfo": "^M4 -"
+    "FullInfo": "VikaDima TestingTest"
   }
 ]
