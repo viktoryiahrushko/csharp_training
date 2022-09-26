@@ -153,7 +153,7 @@ namespace WebAddressbookTests
         {
            
             driver.FindElement(By.XPath("(//div[@id='container']/div[@id='content']/form[@accept-charset='utf-8']" +
-                "/table[@id='maintable']/tbody/tr[4]/td[@class='center'][3]/a[@href='edit.php?id=" + id + "'])")).Click();
+                "/table[@id='maintable']/tbody/tr/td[@class='center'][3]/a[@href='edit.php?id=" + id + "'])")).Click();
 
             return this;
         }
