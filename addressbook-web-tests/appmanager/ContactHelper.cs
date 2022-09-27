@@ -29,6 +29,9 @@ namespace WebAddressbookTests
 
 
         }
+
+        
+
         private List<ContactData> contactCache = null;
         
        
@@ -100,8 +103,8 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContact(String id)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
-
+            //driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
+            driver.FindElement(By.Id(id)).Click();
 
             return this;
         }
@@ -279,7 +282,52 @@ namespace WebAddressbookTests
 
         }
 
+        public void AddContactToGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.GoToHomePage();
+            ClearGroupFilter();
+            SelectContact(contact.Id);
+            SelectGroupToAdd(group.Name);
+            CommitAddingContactToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
 
+        public void RemoveContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectGroupToRemove();
+            SelectContact(contact.Id);
+            RemoveContactFromGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+
+        }
+
+        private void RemoveContactFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+
+        private void SelectGroupToRemove()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("zzz");
+        }
+
+        public void CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+
+        public void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        public void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
+        }
 
         public ContactData GetContactDetailedInformationFromDetailsPage()
         {
@@ -304,7 +352,9 @@ namespace WebAddressbookTests
             return this;
         }
 
-       
+        
+
+
 
 
 
