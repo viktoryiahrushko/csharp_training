@@ -298,20 +298,25 @@ namespace WebAddressbookTests
             manager.Navigator.GoToHomePage();
             SelectGroupToRemove();
             SelectContact(contact.Id);
-            RemoveContactFromGroup();
-            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
-                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+            RemoveContactFromGroup(group.Name);
+            //new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                //.Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
 
         }
 
-        private void RemoveContactFromGroup()
+        private void RemoveContactFromGroup(string name)
         {
-            driver.FindElement(By.Name("remove")).Click();
+            //driver.FindElement(By.Name("remove")).Click();
+
+            //driver.FindElement(By.XPath("//input[@value='Remove from "zzz"']")).Click();
+            //driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='Remove from " + name + "'])")).Click();
+            driver.FindElement(By.XPath("//input[@name='remove']")).Click();
         }
 
         private void SelectGroupToRemove()
         {
             new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("zzz");
+            //new SelectElement(driver.FindElement(By.XPath("(//input[@value='" + id + "'])")));
         }
 
         public void CommitAddingContactToGroup()
