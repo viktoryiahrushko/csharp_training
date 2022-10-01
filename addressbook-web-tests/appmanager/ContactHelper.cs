@@ -102,11 +102,11 @@ namespace WebAddressbookTests
         }
 
        
-        public ContactHelper SelectContact(String id)
+        public void SelectContact(String id)
         {
             //driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
             driver.FindElement(By.Id(id)).Click();
-            return this;
+          
            
         }
 
