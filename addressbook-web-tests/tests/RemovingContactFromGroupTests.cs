@@ -40,13 +40,10 @@ namespace WebAddressbookTests
            
             if (oldList.Count == 0)
             {
-                List<ContactData> contactList = contactAll.Except(oldList).ToList();
-                if (contactList.Count == 0)
-                {
-                    contact = oldList.First();
-                    app.Contacts.RemoveContactFromGroup(contact, group);
+                    contact = contactAll.First();
+                    app.Contacts.AddContactToGroup(contact, group);
                     oldList = group.GetContacts();
-                }
+                
 
             }
 
@@ -55,9 +52,6 @@ namespace WebAddressbookTests
 
             List<ContactData> newList = group.GetContacts();
 
-           
-
-           
             oldList.Remove(contact);
             newList.Sort();
             oldList.Sort();

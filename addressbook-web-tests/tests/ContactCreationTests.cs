@@ -89,8 +89,8 @@ namespace WebAddressbookTests
 
         }
 
-        [Test, TestCaseSource("ContactDataFromExcelFile")]
-        //[Test, TestCaseSource("ContactDataFromJsonFile")]
+        //[Test, TestCaseSource("ContactDataFromExcelFile")]
+        [Test, TestCaseSource("ContactDataFromJsonFile")]
         //[Test, TestCaseSource("ContactDataFromXmlFile")]
         //[Test, TestCaseSource("ContactDataFromFile")]
         //[Test]

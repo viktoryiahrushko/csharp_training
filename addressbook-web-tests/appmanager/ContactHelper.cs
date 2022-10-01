@@ -102,11 +102,11 @@ namespace WebAddressbookTests
         }
 
        
-        public void SelectContact(String id)
+        public ContactHelper SelectContact(String id)
         {
             //driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
             driver.FindElement(By.Id(id)).Click();
-
+            return this;
            
         }
 
@@ -296,12 +296,10 @@ namespace WebAddressbookTests
         public void RemoveContactFromGroup(ContactData contact, GroupData group)
         {
             manager.Navigator.GoToHomePage();
-            //ClearGroupFilter();
             SelectGroupToRemove(group.Name);
             SelectContact(contact.Id);
             RemoveContactFromGroup();
-            //new WebDriverWait(driver, TimeSpan.FromSeconds(10))
-                //.Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+           
         }
 
         private void RemoveContactFromGroup()
