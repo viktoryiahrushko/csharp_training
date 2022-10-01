@@ -101,12 +101,13 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper SelectContact(String id)
+       
+        public void SelectContact(String id)
         {
             //driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
             driver.FindElement(By.Id(id)).Click();
 
-            return this;
+           
         }
 
         public ContactHelper SelectContact(int id)
@@ -292,33 +293,32 @@ namespace WebAddressbookTests
             new WebDriverWait(driver, TimeSpan.FromSeconds(10))
                 .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
         }
-
         public void RemoveContactFromGroup(ContactData contact, GroupData group)
         {
             manager.Navigator.GoToHomePage();
-            SelectGroupToRemove();
+            //ClearGroupFilter();
+            SelectGroupToRemove(group.Name);
             SelectContact(contact.Id);
-            RemoveContactFromGroup(group.Name);
+            RemoveContactFromGroup();
             //new WebDriverWait(driver, TimeSpan.FromSeconds(10))
                 //.Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
-
         }
 
-        private void RemoveContactFromGroup(string name)
+        private void RemoveContactFromGroup()
         {
             //driver.FindElement(By.Name("remove")).Click();
 
             //driver.FindElement(By.XPath("//input[@value='Remove from "zzz"']")).Click();
             //driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='Remove from " + name + "'])")).Click();
             driver.FindElement(By.XPath("//input[@name='remove']")).Click();
+
         }
 
-        private void SelectGroupToRemove()
+        private void SelectGroupToRemove(string name)
         {
-            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("zzz");
-            //new SelectElement(driver.FindElement(By.XPath("(//input[@value='" + id + "'])")));
+            //new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("zzz");
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(name);
         }
-
         public void CommitAddingContactToGroup()
         {
             driver.FindElement(By.Name("add")).Click();

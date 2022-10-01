@@ -89,10 +89,11 @@ namespace WebAddressbookTests
 
         }
 
-        //[Test, TestCaseSource("ContactDataFromExcelFile")]
-        [Test, TestCaseSource("ContactDataFromJsonFile")]
+        [Test, TestCaseSource("ContactDataFromExcelFile")]
+        //[Test, TestCaseSource("ContactDataFromJsonFile")]
         //[Test, TestCaseSource("ContactDataFromXmlFile")]
         //[Test, TestCaseSource("ContactDataFromFile")]
+        //[Test]
 
         public void ContactCreationTest(ContactData contact)
         {
@@ -107,11 +108,12 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldContacts, newContacts);
         }
 
-        [Test, TestCaseSource("RandomContactDataProvider")]
+        //[Test, TestCaseSource("RandomContactDataProvider")]
+       // [Test]
         public void BadContactCreationTest(ContactData contact)
         {
 
-            //ContactData contact = new ContactData("V'v");
+           // ContactData contact = new ContactData("V'v");
             //contact.Lname = "Vysotsky";
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
