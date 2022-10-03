@@ -102,13 +102,8 @@ namespace WebAddressbookTests
         }
 
        
-        public void SelectContact(String id)
-        {
-            //driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
-            driver.FindElement(By.Id(id)).Click();
-          
-           
-        }
+       
+
 
         public ContactHelper SelectContact(int id)
         {
@@ -202,6 +197,7 @@ namespace WebAddressbookTests
         {
             manager.Contacts.FillOutContactInformation(contact);
             SubmitNewContact();
+          
             return this;
         }
         public ContactHelper ReturnToHomePage()
@@ -301,7 +297,12 @@ namespace WebAddressbookTests
             RemoveContactFromGroup();
            
         }
+        public void SelectContact(string id)
+        {
+            //driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
+            driver.FindElement(By.Id(id)).Click();
 
+        }
         private void RemoveContactFromGroup()
         {
             //driver.FindElement(By.Name("remove")).Click();

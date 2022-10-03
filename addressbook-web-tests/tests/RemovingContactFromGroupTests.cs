@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
+
     public class RemovingContactFromGroupTests : AuthTestBase
     {
         [Test]

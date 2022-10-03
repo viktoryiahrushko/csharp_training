@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
+  
     public class AddingContactToGroupTests : AuthTestBase
     {
         [Test]
@@ -21,6 +22,8 @@ namespace WebAddressbookTests
                 app.Groups.Create(groupdata);
             }
             GroupData group = GroupData.GetAll()[0];
+
+
             ContactData contact = new ContactData();
 
             List<ContactData> contactAll = ContactData.GetAll();
@@ -47,11 +50,16 @@ namespace WebAddressbookTests
 
             }
 
+            contactAll = ContactData.GetAll();
             contact = contactAll.Except(oldList).First();
+          
             app.Contacts.AddContactToGroup(contact, group);
             oldList.Add(contact);
             List<ContactData> newList = group.GetContacts();
+
+
             
+
             newList.Sort();
             oldList.Sort();
 
